@@ -5,24 +5,26 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/p/properscoring/properscoring-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/p/properscoring/properscoring-{{ version }}.tar.gz
   sha256: b0cc4963cc218b728d6c5f77b3259c8f835ae00e32e82678cdf6936049b93961
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: "{{ PYTHON }} -m pip install . --no-deps -vv"
 
 requirements:
   host:
-    - python
+    - python {{ python_min }}
     - pip
   run:
-    - python
+    - python >={{ python_min }}
     - numpy
     - scipy
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - properscoring
 
